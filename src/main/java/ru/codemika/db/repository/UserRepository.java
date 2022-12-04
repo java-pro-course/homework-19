@@ -7,4 +7,8 @@ import ru.codemika.db.entity.UserEntity;
 @Repository
 public interface UserRepository extends JpaRepository<UserEntity, Long> {
     UserEntity findByEmail(String email);
+
+    UserEntity findByFirstNameAndLastName(String firstName, String lastName);
+
+    boolean existsByEmail(String email);
 }

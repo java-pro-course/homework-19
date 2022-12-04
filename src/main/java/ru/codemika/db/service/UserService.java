@@ -1,8 +1,11 @@
 package ru.codemika.db.service;
 
 import org.springframework.stereotype.Service;
+import ru.codemika.db.dto.CreateNewUser;
 import ru.codemika.db.entity.UserEntity;
 import ru.codemika.db.repository.UserRepository;
+
+import java.util.List;
 
 @Service
 public class UserService {
@@ -23,5 +26,28 @@ public class UserService {
     public UserEntity findByEmail(String userEmail) {
         UserEntity user = userRepository.findByEmail(userEmail);
         return user;
+    }
+
+    public UserEntity findByName(String firstName, String lastName) {
+        return userRepository.findByFirstNameAndLastName(firstName, lastName);
+    }
+
+    public UserEntity createNewUser(CreateNewUser request) {
+        if (userRepository.existsByEmail(request.getEmail())) {
+            throw new RuntimeException(
+                    String.format("User with email %s is already exist! Email = %s", request.getEmail(), request.getEmail())
+            );
+//            throw new RuntimeException("User with email " + email + " is already exist!");
+        }
+
+        UserEntity newUser = new UserEntity();
+
+        newUser.setFirstName(request.getFirstName());
+        newUser.setLastName(request.getLastName());
+        newUser.setAge(request.getAge());
+        newUser.setEmail(request.getEmail());
+        newUser.setPass(request.getPass());
+
+        return userRepository.save(newUser);
     }
 }
