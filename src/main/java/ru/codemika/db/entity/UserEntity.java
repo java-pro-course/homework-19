@@ -3,7 +3,7 @@ package ru.codemika.db.entity;
 import javax.persistence.*;
 
 @Entity
-@Table(schema = "public", name = "user")
+@Table(schema = "koritskiy", name = "user")
 public class UserEntity {
 
     @Id

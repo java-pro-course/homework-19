@@ -50,4 +50,9 @@ public class UserService {
 
         return userRepository.save(newUser);
     }
+
+    public String deleteById(Long id) {
+        userRepository.deleteById(id);
+        return "OK";
+    }
 }
