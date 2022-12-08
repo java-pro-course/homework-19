@@ -14,18 +14,18 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("find-by-id/{userId}") // kebab-case
+    @GetMapping("find-user-by-id/{userId}") // kebab-case
     public UserEntity findUserById(@PathVariable Long userId) {
         return userService.findById(userId);
     }
 
-    @GetMapping("find-by-email/{userEmail}")
+    @GetMapping("find-user-by-email/{userEmail}")
     public UserEntity findUserByEmail(@PathVariable String userEmail) {
         return userService.findByEmail(userEmail);
     }
 
     // #1: Поиск по имени и фамилии (по firstName and lastName)
-    @GetMapping("find-by-name/{firstName}/{lastName}")
+    @GetMapping("find-user-by-name/{firstName}/{lastName}")
     public UserEntity findByName(@PathVariable String firstName,
                                  @PathVariable String lastName) {
         return userService.findByName(firstName, lastName);
@@ -43,5 +43,14 @@ public class UserController {
     }
 
     // #3: При создании нового пользователя необходимо проверять, что его почта уникальна!
-    // TODO #4: Удаление пользователя по его id или почте
+    // #4: Удаление пользователя по его id или почте
+    @DeleteMapping("delete-user-by-id/{id}")
+    public String deleteUserById(@PathVariable Long id) {
+        return userService.deleteUserById(id);
+    }
+
+    @DeleteMapping("delete-user-by-email/{email}")
+    public String deleteUserById(@PathVariable String email){
+        return userService.deleteUserByEmail(email);
+    }
 }

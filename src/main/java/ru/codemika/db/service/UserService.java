@@ -5,8 +5,6 @@ import ru.codemika.db.dto.CreateNewUser;
 import ru.codemika.db.entity.UserEntity;
 import ru.codemika.db.repository.UserRepository;
 
-import java.util.List;
-
 @Service
 public class UserService {
 
@@ -19,13 +17,11 @@ public class UserService {
     public UserEntity findById(Long userId) {
         // findById возвращает не просто UserEntity, а Optional<UserEntity>.
         // чтобы от этого избавиться - необходимо написать .get() в конце
-        UserEntity user = userRepository.findById(userId).get();
-        return user;
+        return userRepository.findById(userId).get();
     }
 
     public UserEntity findByEmail(String userEmail) {
-        UserEntity user = userRepository.findByEmail(userEmail);
-        return user;
+        return userRepository.findByEmail(userEmail);
     }
 
     public UserEntity findByName(String firstName, String lastName) {
@@ -37,9 +33,7 @@ public class UserService {
             throw new RuntimeException(
                     String.format("User with email %s is already exist! Email = %s", request.getEmail(), request.getEmail())
             );
-//            throw new RuntimeException("User with email " + email + " is already exist!");
         }
-
         UserEntity newUser = new UserEntity();
 
         newUser.setFirstName(request.getFirstName());
@@ -49,5 +43,16 @@ public class UserService {
         newUser.setPass(request.getPass());
 
         return userRepository.save(newUser);
+    }
+
+    public String deleteUserById(Long id) {
+        userRepository.deleteById(id);
+        return "deleted!";
+    }
+
+    public String deleteUserByEmail(String email) {
+        UserEntity user = userRepository.findByEmail(email);
+        userRepository.deleteById(user.getId());
+        return "deleted!";
     }
 }
