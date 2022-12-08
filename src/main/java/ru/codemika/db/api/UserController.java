@@ -43,5 +43,14 @@ public class UserController {
     }
 
     // #3: При создании нового пользователя необходимо проверять, что его почта уникальна!
-    // TODO #4: Удаление пользователя по его id или почте
+    // #4: Удаление пользователя по его id или почте
+    @DeleteMapping("delete-user-by-id/{id}")
+    public UserEntity deleteUserById(@PathVariable Long id) {
+        return userService.deleteUserById(id);
+    }
+
+    @DeleteMapping("delete-user-by-email/{email}")
+    public UserEntity deleteUserById(@PathVariable String email){
+        return userService.deleteUserByEmail(email);
+    }
 }

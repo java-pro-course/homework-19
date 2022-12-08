@@ -5,8 +5,6 @@ import ru.codemika.db.dto.CreateNewUser;
 import ru.codemika.db.entity.UserEntity;
 import ru.codemika.db.repository.UserRepository;
 
-import java.util.List;
-
 @Service
 public class UserService {
 
@@ -37,9 +35,7 @@ public class UserService {
             throw new RuntimeException(
                     String.format("User with email %s is already exist! Email = %s", request.getEmail(), request.getEmail())
             );
-//            throw new RuntimeException("User with email " + email + " is already exist!");
         }
-
         UserEntity newUser = new UserEntity();
 
         newUser.setFirstName(request.getFirstName());
@@ -49,5 +45,16 @@ public class UserService {
         newUser.setPass(request.getPass());
 
         return userRepository.save(newUser);
+    }
+
+    public UserEntity deleteUserById(Long id) {
+        userRepository.deleteById(id);
+        return null;
+    }
+
+    public UserEntity deleteUserByEmail(String email) {
+        UserEntity user = userRepository.findByEmail(email);
+        userRepository.deleteById(user.getId());
+        return null;
     }
 }
