@@ -17,13 +17,11 @@ public class UserService {
     public UserEntity findById(Long userId) {
         // findById возвращает не просто UserEntity, а Optional<UserEntity>.
         // чтобы от этого избавиться - необходимо написать .get() в конце
-        UserEntity user = userRepository.findById(userId).get();
-        return user;
+        return userRepository.findById(userId).get();
     }
 
     public UserEntity findByEmail(String userEmail) {
-        UserEntity user = userRepository.findByEmail(userEmail);
-        return user;
+        return userRepository.findByEmail(userEmail);
     }
 
     public UserEntity findByName(String firstName, String lastName) {
@@ -47,14 +45,14 @@ public class UserService {
         return userRepository.save(newUser);
     }
 
-    public UserEntity deleteUserById(Long id) {
+    public String deleteUserById(Long id) {
         userRepository.deleteById(id);
-        return null;
+        return "deleted!";
     }
 
-    public UserEntity deleteUserByEmail(String email) {
+    public String deleteUserByEmail(String email) {
         UserEntity user = userRepository.findByEmail(email);
         userRepository.deleteById(user.getId());
-        return null;
+        return "deleted!";
     }
 }
