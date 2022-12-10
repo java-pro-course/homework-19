@@ -1,0 +1,6 @@
+spring:
+  datasource:
+    username: postgres
+    password: admin
+    url: jdbc:postgresql://localhost:5432/svarog_practic
+    driver-class-name: org.postgresql.Driver
