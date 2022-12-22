@@ -3,3 +3,8 @@ spring:
     username: javapro
     password: ELncWdLB
     url: jdbc:postgresql://rc1b-0ckq9oilrgugcaer.mdb.yandexcloud.net:6432/javapro
+
+  liquibase:
+    enabled: true
+    change-log: classpath:db/changelog-master.yml
+    default-schema: koritskiy # использовать свою схему!

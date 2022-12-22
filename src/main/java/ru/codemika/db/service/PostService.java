@@ -9,7 +9,6 @@ import ru.codemika.db.repository.PostRepository;
 public class PostService {
     private final PostRepository postRepository;
 
-
     public PostService(PostRepository postRepository) {
         this.postRepository = postRepository;
     }
@@ -18,7 +17,6 @@ public class PostService {
         PostEntity entity = new PostEntity();
         entity.setContent(createNewPost.getContent());
         entity.setDate(createNewPost.getDate());
-
         return postRepository.save(entity);
     }
 }
